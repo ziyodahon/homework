@@ -1,0 +1,63 @@
+dish_name = input('Dish name :')
+price = int(input('Price :'))
+quantity = int(input('Quantity :'))
+name = input('Write your name :')
+has_student_id = input('Student ID(yes/no) :')
+order_time = int(input('Order time(1-24) :'))
+
+subtotal_before_discounts = subtotal = price * quantity
+#Student ID
+if has_student_id == 'yes' and (14 > order_time or order_time > 17):
+    subtotal = subtotal - 0.15*subtotal
+    print(subtotal)
+#Happy hour
+elif has_student_id == 'no' and 14 <= order_time <= 17:
+    subtotal = subtotal - 0.2*subtotal
+    print(subtotal)
+elif has_student_id == 'yes' and 14 <= order_time <= 17:
+    subtotal = subtotal - 0.2*subtotal
+    print(subtotal)
+
+#Large order discount
+if subtotal >= 150000:
+    subtotal = subtotal - 0.05*subtotal
+print(subtotal)
+
+after_discounts = subtotal
+
+#Service charge
+subtotal = subtotal + subtotal*0.1
+print(subtotal)
+#Delivery fee
+if subtotal < 100000:
+    subtotal = subtotal + 15000
+
+    
+print('Customer name :', name, ', Student status :', has_student_id, ', Order time :', order_time)
+print('Dish name :', dish_name)
+print('Subtotal before discounts :', subtotal_before_discounts)
+
+#Student ID
+if has_student_id == 'yes' and (14 > order_time or order_time > 17):
+    print('Student Id discount : True/', subtotal_before_discounts*0.15)
+else:
+    print('Student Id discount : False/0')
+#Happy hour
+if 14 <= order_time <= 17:
+    print('Happy hour discount : True/', subtotal_before_discounts*0.2)
+else:
+    print('Happy hour discount : False/0')
+
+#Which one
+if 14 <= order_time <= 17 and has_student_id == 'yes':
+    print('Happy hour discount was applied')
+
+#Large order discount
+if subtotal_before_discounts >= 150000:
+    print('Large order discount : True/', subtotal_before_discounts*0.05)
+else:
+    print('Large order discount : True/0')
+
+print('Total discount :', subtotal_before_discounts - after_discounts)
+print('Subtotal after discounts :', after_discounts)
+print('Service charge amount :', after_discounts*0.1)
